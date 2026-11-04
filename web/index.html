@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<!--
+  TECHVERDE PDV - PÁGINA ÚNICA (Single Page Application)
+  Esta página contém três "telas" que se alternam sem recarregar o navegador:
+    1) #tela-apresentacao : introdução à empresa e ao sistema (aparece primeiro)
+    2) #tela-login        : janela de entrada com usuário e senha
+    3) #app               : o sistema em si (menu lateral + páginas)
+  Os textos da empresa vêm do back end (Empresa.java) através dos atributos data-emp.
+-->
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>MaxRevolution PDV</title>
+
+  <!-- Fontes bonitas (Poppins + Orbitron). Sem internet, o navegador usa fontes alternativas. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600;700;800&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo.jpg">
+  <link rel="stylesheet" href="css/estilo.css">
+</head>
+<body>
+
+  <!-- Logotipo reutilizável: folha dentro de um chip hexagonal -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="logo" viewBox="0 0 48 48">
+      <defs>
+        <linearGradient id="gradLogo" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="#9af59a"/>
+          <stop offset="1" stop-color="#1f7a3a"/>
+        </linearGradient>
+      </defs>
+      <path d="M24 3 42 13.5v21L24 45 6 34.5v-21z" fill="#0b120d" stroke="url(#gradLogo)" stroke-width="2.2" stroke-linejoin="round"/>
+      <path d="M15 31c0-9 6-15 17-15 0 10-6 16-15 16-.8 0-1.5-.1-2-.3z" fill="url(#gradLogo)"/>
+      <path d="M16 32c4-5 8-9 13-12" stroke="#0b120d" stroke-width="1.6" stroke-linecap="round" fill="none"/>
+      <circle cx="33" cy="32" r="1.8" fill="#9af59a"/>
+      <circle cx="14" cy="18" r="1.5" fill="#9af59a"/>
+    </symbol>
+  </svg>
+
+  <!-- ====================================================================
+       TELA 1: APRESENTAÇÃO DA EMPRESA E DO SISTEMA
+       ==================================================================== -->
+  <div id="tela-apresentacao">
+
+    <header class="nav-apres">
+      <div class="nav-marca marca-fonte">
+        <img class="logo-sm" src="img/logo.jpg" alt="Logo">
+        <span data-emp="nome">MaxRevolution</span>
+      </div>
+      <nav class="nav-links">
+        <a href="#empresa">A empresa</a>
+        <a href="#sistema">O sistema</a>
+        <a href="#acesso">Perfis de acesso</a>
+        <a href="#requisitos">Requisitos</a>
+        <a href="#tecnologia">Tecnologia</a>
+        <button class="btn primario" id="btn-abrir-login">Entrar no sistema</button>
+      </nav>
+    </header>
+
+    <!-- Destaque principal -->
+    <section class="hero" id="inicio">
+      <div>
+        <span class="hero-selo">🌿 Sistema de Ponto de Venda e Gestão</span>
+        <h1><span data-emp="nome">MaxRevolution</span></h1>
+        <p class="subtitulo" data-emp="subtitulo"></p>
+        <p class="texto" data-emp="slogan"></p>
+        <div class="hero-botoes">
+          <button class="btn primario grande" id="btn-hero-login">Entrar no sistema →</button>
+          <a class="btn grande" href="#empresa">Conhecer a empresa</a>
+        </div>
+      </div>
+      <div class="hero-visual">
+        <div class="painel-flutuante">
+          <img class="logo-gg" src="img/logo.jpg" alt="Logo">
+          <div class="mini-stats">
+            <div class="mini-stat"><b>PDV</b><small>Vendas rápidas</small></div>
+            <div class="mini-stat"><b>OS</b><small>Assistência técnica</small></div>
+            <div class="mini-stat"><b>ESTOQUE</b><small>Controle total</small></div>
+            <div class="mini-stat"><b>ATACADO</b><small>Preço por volume</small></div>
+          </div>
+          <div class="mini-barras" aria-hidden="true">
+            <i style="height:35%"></i><i style="height:55%"></i><i style="height:42%"></i>
+            <i style="height:72%"></i><i style="height:60%"></i><i style="height:90%"></i>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre a empresa -->
+    <section class="secao" id="empresa">
+      <div class="container">
+        <h2 class="secao-titulo">Conheça a <span data-emp="nome">MaxRevolution</span></h2>
+        <p class="secao-sub" data-emp="descricao"></p>
+        <div class="grade-cards">
+          <div class="card-info"><div class="icone">🛠️</div><h4>Assistência Técnica</h4><p>Conserto de celulares, notebooks e computadores, com ordem de serviço, orçamento e acompanhamento de cada etapa.</p></div>
+          <div class="card-info"><div class="icone">📱</div><h4>Aparelhos e Acessórios</h4><p>Smartphones, capinhas, películas, carregadores, cabos, fones e muito mais para o seu celular.</p></div>
+          <div class="card-info"><div class="icone">💻</div><h4>Informática em Geral</h4><p>Hardware (SSD, memórias, fontes, coolers), periféricos e software: licenças e antivírus.</p></div>
+          <div class="card-info"><div class="icone">📦</div><h4>Atacado de Peças</h4><p>Telas, baterias, conectores e componentes para técnicos e lojistas, com preço e desconto por volume.</p></div>
+        </div>
+        <div class="info-empresa">
+          <div><small>Endereço</small><span data-emp="endereco"></span></div>
+          <div><small>Telefone</small><span data-emp="telefone"></span></div>
+          <div><small>E-mail</small><span data-emp="email"></span></div>
+          <div><small>Horário</small><span data-emp="horario"></span></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Sobre o sistema -->
+    <section class="secao" id="sistema">
+      <div class="container">
+        <h2 class="secao-titulo">O <span>sistema PDV</span></h2>
+        <p class="secao-sub">Um sistema completo para o dia a dia da loja: do balcão de vendas ao estoque, passando pela assistência técnica e pelos relatórios gerenciais. Back end em Java e front end web, conectados e funcionando em tempo real.</p>
+        <div class="grade-cards">
+          <div class="card-info"><div class="icone">🛒</div><h4>PDV - Vendas</h4><p>Busca por nome ou código de barras, carrinho, varejo ou atacado, formas de pagamento e cupom para impressão.</p></div>
+          <div class="card-info"><div class="icone">📦</div><h4>Estoque de Produtos</h4><p>Cadastro com preço de custo, varejo e atacado, categorias, baixa automática nas vendas e alerta de estoque mínimo.</p></div>
+          <div class="card-info"><div class="icone">👥</div><h4>Clientes</h4><p>Cadastro de clientes de varejo e atacado, usados nas vendas e nas ordens de serviço.</p></div>
+          <div class="card-info"><div class="icone">🚚</div><h4>Fornecedores</h4><p>Controle de quem abastece a loja e do que cada fornecedor entrega.</p></div>
+          <div class="card-info"><div class="icone">🛠️</div><h4>Ordens de Serviço</h4><p>Acompanha cada aparelho em conserto: defeito, técnico, status, valor de serviço e de peças.</p></div>
+          <div class="card-info"><div class="icone">🧾</div><h4>Histórico de Vendas</h4><p>Consulta de vendas, reimpressão de cupom e cancelamento com devolução ao estoque.</p></div>
+          <div class="card-info"><div class="icone">📊</div><h4>Dashboard e Relatórios</h4><p>Faturamento, lucro, mais vendidos, estoque baixo e matriz de vendas por categoria e pagamento.</p></div>
+          <div class="card-info"><div class="icone">🔐</div><h4>Usuários e Perfis</h4><p>Login com senha criptografada e permissões diferentes para administrador, vendedor e técnico.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Perfis de acesso (matriz vinda do back end) -->
+    <section class="secao" id="acesso">
+      <div class="container">
+        <h2 class="secao-titulo">Perfis de <span>acesso</span></h2>
+        <p class="secao-sub">Cada usuário enxerga apenas o que seu perfil permite. Esta tabela é a <b>matriz de permissões</b> (perfil × módulo) usada pelo back end.</p>
+        <div id="apres-matriz" class="tabela-wrap"></div>
+      </div>
+    </section>
+
+    <!-- Elicitação de requisitos -->
+    <section class="secao" id="requisitos">
+      <div class="container">
+        <h2 class="secao-titulo">Requisitos <span>levantados</span></h2>
+        <p class="secao-sub">Resultado da elicitação: o que o sistema precisa fazer (funcionais) e as qualidades esperadas dele (não funcionais).</p>
+        <div class="duas-colunas">
+          <div class="card">
+            <h3>Requisitos funcionais</h3>
+            <ul class="lista-req">
+              <li><b>RF01</b>Autenticar usuários com login e senha e controlar o acesso por perfil.</li>
+              <li><b>RF02</b>Cadastrar, consultar, alterar e excluir produtos com preços de custo, varejo e atacado.</li>
+              <li><b>RF03</b>Controlar o estoque, com baixa automática nas vendas e alerta de estoque mínimo.</li>
+              <li><b>RF04</b>Cadastrar clientes (varejo e atacado) e fornecedores.</li>
+              <li><b>RF05</b>Registrar vendas no PDV com busca, carrinho, forma de pagamento e cupom.</li>
+              <li><b>RF06</b>Aplicar desconto automático por volume nas vendas de atacado.</li>
+              <li><b>RF07</b>Registrar e acompanhar ordens de serviço da assistência técnica.</li>
+              <li><b>RF08</b>Cancelar vendas devolvendo os itens ao estoque (somente administrador).</li>
+              <li><b>RF09</b>Exibir dashboard e relatórios gerenciais de vendas, lucro e estoque.</li>
+            </ul>
+          </div>
+          <div class="card">
+            <h3>Requisitos não funcionais</h3>
+            <ul class="lista-req">
+              <li><b>RNF01</b>Interface web com a identidade visual da loja (verde e preto).</li>
+              <li><b>RNF02</b>Funcionar no computador da loja, sem internet e sem banco de dados externo.</li>
+              <li><b>RNF03</b>Guardar os dados em arquivos CSV (abrem no Excel), na pasta "dados".</li>
+              <li><b>RNF04</b>Armazenar senhas com hash SHA-256 e "sal", nunca em texto puro.</li>
+              <li><b>RNF05</b>Código Java organizado em pacotes e totalmente comentado.</li>
+              <li><b>RNF06</b>Responder às operações do dia a dia em menos de 1 segundo.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tecnologia -->
+    <section class="secao" id="tecnologia">
+      <div class="container">
+        <h2 class="secao-titulo"><span>Tecnologia</span> utilizada</h2>
+        <p class="secao-sub">Tudo foi feito do zero, sem frameworks, para mostrar como cada parte funciona.</p>
+        <div>
+          <span class="selo-tec">☕ Java 21</span>
+          <span class="selo-tec">🌐 Servidor HTTP nativo (com.sun.net.httpserver)</span>
+          <span class="selo-tec">📄 Arquivos CSV e API em JSON (feitos à mão)</span>
+          <span class="selo-tec">🧱 Orientação a objetos</span>
+          <span class="selo-tec">🔢 Vetores e matrizes</span>
+          <span class="selo-tec">🔁 Classes genéricas</span>
+          <span class="selo-tec">🎨 HTML + CSS + JavaScript puros</span>
+          <span class="selo-tec">🔌 API REST</span>
+        </div>
+        <div style="margin-top:34px;text-align:center">
+          <button class="btn primario grande" id="btn-final-login">Entrar no sistema →</button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="rodape-apres">
+      <span data-emp="nome">MaxRevolution</span> PDV · Trabalho de Elicitação de Requisitos e Programação em Java
+    </footer>
+  </div>
+
+  <!-- ====================================================================
+       TELA 2: LOGIN
+       ==================================================================== -->
+  <div id="tela-login" class="oculto">
+    <form class="login-card" id="form-login" autocomplete="off">
+      <img class="logo" src="img/logo.jpg" alt="Logo">
+      <h2 data-emp="nome">MaxRevolution</h2>
+      <p class="sub-login">Acesse o sistema com seu usuário e senha</p>
+      <div class="campo"><label for="login-usuario">Usuário</label><input type="text" id="login-usuario" required autofocus></div>
+      <div class="campo"><label for="login-senha">Senha</label><input type="password" id="login-senha" required></div>
+      <div class="erro-login" id="login-erro"></div>
+      <button class="btn primario bloco grande" type="submit">Entrar</button>
+      <button class="btn fantasma bloco" type="button" id="btn-fechar-login" style="margin-top:8px">Voltar</button>
+      <div class="demo-acessos">
+        <small>Acessos de demonstração (clique para preencher)</small>
+        <div class="demo-botoes">
+          <button type="button" class="btn pequeno" data-demo="davi|1234">👑 Davi (Admin)</button>
+          <button type="button" class="btn pequeno" data-demo="emilly|1234">👑 Emilly (Admin)</button>
+          <button type="button" class="btn pequeno" data-demo="carla|venda123">🛒 Vendedor</button>
+          <button type="button" class="btn pequeno" data-demo="rafael|tec123">🛠️ Técnico</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <!-- ====================================================================
+       TELA 3: SISTEMA (depois do login)
+       ==================================================================== -->
+  <div id="app" class="oculto">
+    <aside id="menu">
+      <div class="menu-marca">
+        <img class="logo-sm" src="img/logo.jpg" alt="Logo">
+        <div><strong data-emp="nome">MaxRevolution</strong><small data-emp="subtitulo"></small></div>
+      </div>
+      <nav id="menu-itens"></nav>
+      <div class="menu-rodape">
+        <div class="usuario-chip" id="usuario-chip"></div>
+        <button class="btn fantasma bloco" id="btn-sair">⏻ Sair</button>
+      </div>
+    </aside>
+    <main>
+      <header id="topo">
+        <h1 id="titulo-pagina"></h1>
+        <div id="topo-direita"></div>
+      </header>
+      <section id="conteudo"></section>
+    </main>
+  </div>
+
+  <!-- Áreas usadas por janelas modais e avisos -->
+  <div id="modal-raiz"></div>
+  <div id="toasts"></div>
+
+  <!-- Scripts (a ordem importa: cada arquivo usa o anterior) -->
+  <script src="js/api.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/cadastros.js"></script>
+  <script src="js/pdv.js"></script>
+  <script src="js/paginas.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
